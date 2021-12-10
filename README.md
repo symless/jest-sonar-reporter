@@ -37,7 +37,7 @@ jest
 
 For your Continuous Integration you can simply do:
 ```shell
-jest --ci --reporters=default --reporters=jest-sonar-reporter
+jest --ci --reporters=default --reporters=@casualbot/jest-sonar-reporter
 ```
 
 ## Usage as testResultsProcessor (deprecated)
@@ -95,7 +95,7 @@ You can configure these options via the command line as seen below:
 JEST_SUITE_NAME="Jest JUnit Unit Tests" JEST_SONAR_OUTPUT_DIR="./artifacts" jest
 ```
 
-Or you can also define a `jest-sonar-reporter` key in your `package.json`.  All are **string** values.
+Or you can also define a `@casualbot/jest-sonar-reporter` key in your `package.json`.  All are **string** values.
 
 ```json
 {
