@@ -1,53 +1,67 @@
 {
-  "name": "jest-sonar-reporter",
-  "version": "2.0.0",
+  "name": "@casualbot/jest-sonar-reporter",
+  "version": "1.0.0",
   "description": "A Sonar test reporter for Jest.",
   "keywords": [
     "sonar",
     "sonarqube",
     "jest",
-    "results",
+    "reporter",
     "processor"
   ],
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
-    "clean": "rimraf reports* coverage",
-    "test": "jest",
+    "test": "tsc --module commonjs && jest",
     "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage",
-    "test:debug": "DEBUG=true jest",
-    "preversion": "npm run clean && npm run test:coverage",
-    "version": "./version.sh $npm_package_version && git add sonar-project.properties"
+    "test:coverage": "tsc --module commonjs && jest --coverage",
+    "build": "tsc",
+    "lint": "eslint . -c .eslintrc.js --quiet",
+    "lint:coverage": "eslint . -c .eslintrc.js -f json -o ./coverage/eslint.json"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/3dmind/jest-sonar-reporter.git"
+    "url": "git+https://github.com/CasualBot/jest-sonar-reporter.git"
   },
-  "author": "Christian Wlatschiha <c.wlatschiha@gmail.com>",
+  "author": "Shawn Bernard <casualbotdev@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/3dmind/jest-sonar-reporter/issues"
+    "url": "https://github.com/CasualBot/jest-sonar-reporter/issues"
   },
-  "homepage": "https://github.com/3dmind/jest-sonar-reporter#readme",
+  "homepage": "https://github.com/CasualBot/jest-sonar-reporter#readme",
   "engines": {
-    "node": ">=8.0.0"
-  },
-  "dependencies": {
-    "xml": "^1.0.1"
+    "node": ">=16.0.0"
   },
   "devDependencies": {
-    "@types/jest": "^22.2.0",
-    "@types/node": "^9.4.7",
-    "jest": "^22.4.2",
-    "rimraf": "^2.6.2"
+    "@babel/cli": "7.16.0",
+    "@babel/core": "7.16.0",
+    "@babel/plugin-transform-modules-commonjs": "7.16.0",
+    "@babel/plugin-transform-typescript": "7.16.1",
+    "@babel/preset-env": "7.16.4",
+    "@babel/preset-typescript": "7.16.0",
+    "@types/jest": "27.0.3",
+    "@types/mkdirp": "1.0.2",
+    "@types/node": "16.11.12",
+    "@types/uuid": "8.3.3",
+    "@types/xml": "1.0.6",
+    "@typescript-eslint/eslint-plugin": "^5.6.0",
+    "@typescript-eslint/parser": "^5.6.0",
+    "babel-eslint": "^10.1.0",
+    "babel-jest": "27.4.2",
+    "eslint": "^8.4.1",
+    "eslint-config-prettier": "8.3.0",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-jest": "^25.3.0",
+    "eslint-plugin-prettier": "4.0.0",
+    "eslint-plugin-react": "^7.27.1",
+    "jest": "27.4.3",
+    "prettier": "2.5.1",
+    "strip-ansi": "^7.0.1",
+    "ts-jest": "^27.1.1",
+    "typescript": "^4.5.3",
+    "uuid": "8.3.2"
   },
-  "jest": {
-    "testEnvironment": "node",
-    "testResultsProcessor": "<rootDir>/index.js"
-  },
-  "jestSonar": {
-    "reportPath": "reports",
-    "reportFile": "test-report.xml",
-    "indent": 4
+  "dependencies": {
+    "mkdirp": "1.0.4",
+    "xml": "1.0.1"
   }
 }

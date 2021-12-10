@@ -1,143 +1,75 @@
-# jest-sonar-reporter
+# Jest Sonar Reporter
 
-[![Build Status](https://travis-ci.org/3dmind/jest-sonar-reporter.svg?branch=master)](https://travis-ci.org/3dmind/jest-sonar-reporter)
-[![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=jest-sonar-reporter&metric=alert_status)](https://sonarcloud.io/dashboard?id=jest-sonar-reporter)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=CasualBot_jest-sonar-reporter&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=CasualBot_jest-sonar-reporter)
+[![Build](https://github.com/CasualBot/jest-sonar-reporter/actions/workflows/test-and-scan.yml/badge.svg)](https://github.com/CasualBot/jest-sonar-reporter/actions/workflows/test-and-scan.yml)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=CasualBot_jest-sonar-reporter&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=CasualBot_jest-sonar-reporter)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=CasualBot_jest-sonar-reporter&metric=coverage)](https://sonarcloud.io/summary/new_code?id=CasualBot_jest-sonar-reporter)
 
-jest-sonar-reporter is a custom results processor for Jest.
-The processor converts Jest's output into Sonar's
-[generic test data](https://docs.sonarqube.org/display/SONAR/Generic+Test+Data) format.
+> :warning: **This is currently in development and highly unstable. Use are your own discretion.**
+
+`@CasualBot/jest-sonar-scanner` is a custom results processor for Jest derived from Christian W. original work [here](https://github.com/3dmind/jest-sonar-reporter).
+
+The processor converts Jest's output in to Sonarqube's [generic data format] to be used by `sonar.testExecutionReportPaths` configuration
+
+>I am working towards bringing the original package back to life / providing updates as I require it for every day work and have uses cases I would like to inquire.
+
+## Additions from original
+  * [ ] Allow for relative v. absolute pathing for output file mapping
+  * [X] Allow to be configured in `jest.config.js` file for `reporters`
+  * [ ] ESM update from CommonJS format
+  * [ ] Contribution guidelines & CI/CD to allow for community growth
 
 ## Installation
 
 Using npm:
 
 ```bash
-$ npm i -D jest-sonar-reporter
+npm install --save-dev @casualbot/jest-sonar-reporter
 ```
 
 Using yarn:
 
 ```bash
-$ yarn add -D jest-sonar-reporter
+yarn add --dev @casualbot/jest-sonar-reporter
 ```
-
-## Configuration
-
-Configure Jest in your `package.json` to use `jest-sonar-reporter` as a custom results processor.
-
-```json
-{
-  "jest": {
-    "testResultsProcessor": "jest-sonar-reporter"
-  }
-}
-```
-
-Configure Sonar to import the test results. Add the `sonar.testExecutionReportPaths` property to your
-`sonar-project.properties` file.
-
-```properties
-sonar.testExecutionReportPaths=test-report.xml
-```
-
-## Customization
-
-To customize the reporter you can use `package.json` to store the configuration.
-
-Create a `jestSonar` entry like this:
-
-```json
-{
-  "jestSonar": {}
-}
-```
-
-You can customize the following options:
-- `reportPath` This will specify the path to put the report in.
-- `reportFile` This will specify the file name of the report.
-- `indent` This will specify the indentation to format the report.
-
-```json
-{
-  "jestSonar": {
-    "reportPath": "reports",
-    "reportFile": "test-reporter.xml",
-    "indent": 4
-  }
-}
-```
-
-> Important: Don't forget to update `sonar.testExecutionReportPaths` when you use a custom path and file name.
-
-### Support for Sonarqube 5.6.x
-
-Sonarqube 5.6.x does not support [Generic Test Data](https://docs.sonarqube.org/display/SONAR/Generic+Test+Data) however it has a [Generic Test Coverage plugin](https://docs.sonarqube.org/display/PLUG/Generic+Test+Coverage) which offers similar functionality.
-
-If you have the plugin installed on Sonarqube, you can configure this reporter to produce files in supported format.
-
-```json
-{
-  "jestSonar": {
-    "sonar56x": true
-  }
-}
-```
-
-Configure Sonar to import the test results. Add the `sonar.genericcoverage.unitTestReportPaths` property to your
-`sonar-project.properties` file.
-
-```properties
-sonar.genericcoverage.unitTestReportPaths=test-report.xml
-```
-
-### Support for different configuration environments
-
-To support different environments add the `env` property to the configuration and overwrite the value of the option you want to modify for the specific environment.
-You can overwrite the following configuration options: `reportPath`, `reportFile`, `indent`, `sonar56x`
-
-For example: Overwrite the path were the report will be stored.
-```json
-{
-  "jestSonar": {
-    "reportPath": "reports",
-    "reportFile": "test-reporter.xml",
-    "indent": 4,
-    "env": {
-      "test": {
-        "reportPath": "reports-test"
-      }
-    }
-  }
-}
-``` 
-
-Use the `NODE_ENV` variable to activate the environment specific configuration.
-```shell
-NODE_ENV=test npm run test
-``` 
 
 ## Usage
-
-1. Run Jest to execute your tests.
-
-Using npm:
-
-```bash
-$ npm run test
+In your jest config add the following entry:
+```JSON
+{
+  "reporters": [ "default", "jest-sonar-reporter" ]
+}
 ```
 
-Using yarn:
+Then simply run:
 
-```bash
-$ yarn run test
+```shell
+jest
 ```
 
-2. Run sonar-scanner to import the test results.
-
-```bash
-$ sonar-scanner
+For your Continuous Integration you can simply do:
+```shell
+jest --ci --reporters=default --reporters=jest-sonar-reporter
 ```
 
-## Licence
+## Usage as testResultsProcessor (deprecated)
+The support for `testResultsProcessor` is only kept for [legacy reasons][test-results-processor] and might be removed in the future. 
+You should therefore prefer to configure `jest-sonar-reporter` as a _reporter_.
 
-This project uses the [MIT](LICENSE) licence.
+Should you still want to, add the following entry to your jest config:
+```JSON
+{
+  "testResultsProcessor": "jest-sonar-reporter"
+}
+```
+
+Then simply run:
+
+```shell
+jest
+```
+
+For your Continuous Integration you can simply do:
+```shell
+jest --ci --testResultsProcessor="jest-sonar-reporter"
+```
