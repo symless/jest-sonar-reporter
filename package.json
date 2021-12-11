@@ -1,13 +1,19 @@
 {
   "name": "@casualbot/jest-sonar-reporter",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "description": "A Sonar test reporter for Jest.",
   "keywords": [
     "sonar",
     "sonarqube",
     "jest",
     "reporter",
-    "processor"
+    "processor",
+    "test",
+    "jest reporter",
+    "jest sonar reporter",
+    "sonarcloud",
+    "javascript",
+    "typescript"
   ],
   "main": "lib/index.js",
   "scripts": {

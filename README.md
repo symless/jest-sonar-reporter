@@ -64,7 +64,7 @@ jest --ci --testResultsProcessor="@casualbot/jest-sonar-reporter"
 
 ## Configuration
 
-`jest-junit` offers several configurations based on environment variables or a `jest-junit` key defined in `package.json` or a reporter option.
+`@casualbot/jest-sonar-reporter` offers several configurations based on environment variables or a `@casualbot/jest-sonar-reporter` key defined in `package.json` or a reporter option.
 Environment variable and package.json configuration should be **strings**.
 Reporter options should also be strings exception for suiteNameTemplate, classNameTemplate, titleNameTemplate that can also accept a function returning a string.
 
