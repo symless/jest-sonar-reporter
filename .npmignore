@@ -6,6 +6,7 @@ coverage/
 reports/
 __tests__
 test/
+.scannerwork/
 
 
 .travis.yml
