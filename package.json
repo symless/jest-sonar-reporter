@@ -1,6 +1,6 @@
 {
   "name": "@casualbot/jest-sonar-reporter",
-  "version": "2.2.5",
+  "version": "2.2.6",
   "description": "A Sonar test reporter for Jest.",
   "keywords": [
     "sonar",
@@ -35,7 +35,7 @@
   },
   "homepage": "https://github.com/CasualBot/jest-sonar-reporter#readme",
   "engines": {
-    "node": ">=16.0.0"
+    "node": ">=14.0.0"
   },
   "devDependencies": {
     "@babel/cli": "7.16.0",
